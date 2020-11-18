@@ -9,6 +9,8 @@
     <script src="https://unpkg.com/blockly/msg/en.js"></script>
     <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
     <script src="https://unpkg.com/blockly/php_compressed.js"></script>
+    
+    <script src="../src/customBlocks_sql.js"></script>
 
 
 
@@ -22,7 +24,7 @@
         
 
         <p>
-            <select id="languageDropdown" style="font-size : 16px" onchange="myUpdateFunction();">
+            <select id="languageDropdown" style="font-size : 16px" onchange="updateFunction();">
                 <option value="JavaScript"> JavaScript</option>
                 <option value="PHP">PHP</option>
             </select>
@@ -56,6 +58,8 @@
         <category name="Text" colour="%{BKY_TEXTS_HUE}">
             <block type="text"></block>
             <block type="text_print"></block>
+            <block type="text_isEmpty"></block>
+            
         </category>
         <sep></sep>
         <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
@@ -64,6 +68,13 @@
             <block type="procedures_defnoreturn"></block>
             <block type="procedures_defreturn"></block>
             <block type="procedures_mutatorcontainer"></block>
+        </category>
+        <sep></sep>
+        <category name="SQL" colour="42">
+            <block type="sql_select"></block>
+            <block type="sql_from"></block>
+            <block type="sql_where"></block>
+            <block type="sql_table"></block>
         </category>
     </xml>
 
@@ -130,7 +141,7 @@
         
         
         
-        function myUpdateFunction(event){
+        function updateFunction(event){
             
             var languageDropdown = document.getElementById('languageDropdown');
             
@@ -145,7 +156,7 @@
             
             prettyPrint();
         }
-        workspace.addChangeListener(myUpdateFunction);
+        workspace.addChangeListener(updateFunction);
         
 
     </script>
