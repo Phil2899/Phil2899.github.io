@@ -71,14 +71,31 @@
         </category>
         <sep></sep>
         <category name="SQL" colour="42">
-            <block type="sql_select"></block>
-            <block type="sql_from"></block>
-            <block type="sql_where"></block>
-            <block type="sql_table"></block>
+            <category name="Request">
+                <block type="sql_table"></block>
+                <block type="sql_select"></block>
+                <block type="sql_from"></block>
+                <block type="sql_where"></block>
+                <block type="sql_as"></block>
+                <block type="sql_add"></block>
+                <block type="sql_and"></block>
+                <block type="sql_or"></block>
+                <block type="sql_condition"></block>
+                <block type="sql_order_by"></block>
+            </category>
+            <category name="Fonctions">
+                <block type="sql_f_sum"></block>
+                <block type="sql_f_max"></block>
+                <block type="sql_f_min"></block>
+                <block type="sql_f_count"></block>
+            </category>    
         </category>
     </xml>
 
+
+
     <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+<!--
         <block type="controls_if" inline="false" x="20" y="20">
         <mutation else="1"></mutation>
         <value name="IF0">
@@ -125,6 +142,7 @@
             </block>
         </statement>
         </block>
+-->
     </xml>   
 
 
