@@ -268,7 +268,7 @@ Blockly.JavaScript['sql_condition'] = function(block) {
   var text_condition = block.getFieldValue('condition');
   var value_condition = Blockly.JavaScript.valueToCode(block, 'CONDITION', Blockly.JavaScript.ORDER_NONE);
   // TODO: Assemble JavaScript into code variable.
-  var code = text_condition + value_condition;
+  var code = text_condition +' '+ value_condition;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -391,7 +391,7 @@ Blockly.PHP['sql_condition'] = function(block) {
   var text_condition = block.getFieldValue('condition');
   var value_condition = Blockly.PHP.valueToCode(block, 'CONDITION', Blockly.PHP.ORDER_NONE);
   // TODO: Assemble PHP into code variable.
-  var code = text_condition + value_condition;
+  var code = text_condition +' '+ value_condition;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.PHP.ORDER_NONE];
 };
