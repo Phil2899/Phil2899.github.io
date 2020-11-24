@@ -42,6 +42,17 @@ Blockly.Blocks['sql_where'] = {
 Blockly.Blocks['sql_table'] = {
   init: function() {
     this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("table"), "table");
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sql_column'] = {
+  init: function() {
+    this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput("table"), "table")
         .appendField(".")
         .appendField(new Blockly.FieldTextInput("column"), "column");
@@ -182,7 +193,6 @@ Blockly.Blocks['sql_order_by'] = {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 //fonction des blocks en JavaScript
 Blockly.JavaScript['sql_select'] = function(block) {
   var value_select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE) || '\'\'';
@@ -206,6 +216,14 @@ Blockly.JavaScript['sql_where'] = function(block) {
 };
 
 Blockly.JavaScript['sql_table'] = function(block) {
+  var text_table = block.getFieldValue('table');
+  // TODO: Assemble JavaScript into code variable.
+  var code = text_table;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['sql_column'] = function(block) {
   var text_table = block.getFieldValue('table');
   var text_column = block.getFieldValue('column');
   // TODO: Assemble JavaScript into code variable.
@@ -321,6 +339,14 @@ Blockly.PHP['sql_where'] = function(block) {
 };
 
 Blockly.PHP['sql_table'] = function(block) {
+  var text_table = block.getFieldValue('table');
+  // TODO: Assemble PHP into code variable.
+  var code = text_table;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.PHP.ORDER_NONE];
+};
+
+Blockly.PHP['sql_column'] = function(block) {
   var text_table = block.getFieldValue('table');
   var text_column = block.getFieldValue('column');
   // TODO: Assemble PHP into code variable.
