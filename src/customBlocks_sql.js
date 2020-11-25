@@ -43,6 +43,8 @@ Blockly.Blocks['sql_table'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput("table"), "table");
+        /*.appendField(new Blockly.FieldDropDown([[""],table],[["."],column]),"PROPERTY");
+    this.setMutator(new Blockly.Mutator(['column_mutator']));*/
     this.setOutput(true, null);
     this.setColour(42);
  this.setTooltip("");
@@ -191,7 +193,62 @@ Blockly.Blocks['sql_order_by'] = {
   }
 };
 
+Blockly.Blocks['sql_f_round'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ROUND(")
+        .appendField(new Blockly.FieldTextInput("column"), "column")
+        .appendField(")");
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+//mutators
+
+Blockly.Consatants.SQL.TABLE_MUTATOR_MIXIN ={
+  mutationToDom:function(){
+    var container = Blockly.utils.xml.createElement('mutation');
+    var columnInput = (this.getFieldValue('PROPERTY') == '.');
+    container.setAttribute('column_Input',columnInput);
+    return container;
+  }
+  domToMutation:function(xmlElement){
+    var columnInput = (xmlElement.getAttribute('columnInput') == 'true');
+    this.updateShape_(columnInput);
+  }
+  updateShape_:function(columnInput){
+    var inputExists = this.getInput('COLUMN');
+    if(divisorInput){
+      if(!inputExists){
+        this.appendValueInput('COLUMN')
+      }
+      else if (inputExists){
+        this.removeInput('COLUMN').
+      }
+    }
+  }
+}
+
+Blockly.Constants.SQL.TABLE_COLUMN_EXTENSION = function(){
+  this.getField('PROPERTY').setValidator(function(option)){
+    var columnInput = (option == "column");
+    this.getSourceBlock().updateShape_(columnInputInput);
+  }
+}
+
+
+Blockly.Extensions.registerMutator('column_mutator',Blockly.Constants.SQL.TABLE_MUTATOR_MIXIN, Blockly.Constants.SQL.TABLE_COLUMN_EXTENSION);
+*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 //fonction des blocks en JavaScript
 Blockly.JavaScript['sql_select'] = function(block) {
@@ -274,25 +331,25 @@ Blockly.JavaScript['sql_condition'] = function(block) {
 };
 
 Blockly.JavaScript['sql_f_sum'] = function(block) {
-  var text_colonne = block.getFieldValue('table');
+  var text_column = block.getFieldValue('table');
   // TODO: Assemble JavaScript into code variable.
-  var code = ' SUM ('+text_colonne+') ';
+  var code = ' SUM ('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['sql_f_max'] = function(block) {
-  var text_colonne = block.getFieldValue('table');
+  var text_column = block.getFieldValue('table');
  // TODO: Assemble JavaScript into code variable.
-  var code = ' MAX ('+text_colonne+') ';
+  var code = ' MAX ('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['sql_f_min'] = function(block) {
-  var text_colonne = block.getFieldValue('table');
+  var text_column = block.getFieldValue('table');
   // TODO: Assemble JavaScript into code variable.
-  var code = ' MIN ('+text_colonne+') ';
+  var code = ' MIN ('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -309,6 +366,15 @@ Blockly.JavaScript['sql_order_by'] = function(block) {
   var text_column = block.getFieldValue('column');
   // TODO: Assemble JavaScript into code variable.
   var code = ' ORDER BY '+text_column;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+Blockly.JavaScript['sql_f_round'] = function(block) {
+  var text_column = block.getFieldValue('column');
+  // TODO: Assemble JavaScript into code variable.
+  var code = ' ROUND('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -397,25 +463,25 @@ Blockly.PHP['sql_condition'] = function(block) {
 };
 
 Blockly.PHP['sql_f_sum'] = function(block) {
-  var text_colonne = block.getFieldValue('table');
+  var text_column = block.getFieldValue('table');
   // TODO: Assemble PHP into code variable.
-  var code = ' SUM ('+text_colonne+') ';
+  var code = ' SUM ('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.PHP.ORDER_NONE];
 };
 
 Blockly.PHP['sql_f_max'] = function(block) {
-  var text_colonne = block.getFieldValue('table');
+  var text_column = block.getFieldValue('table');
   // TODO: Assemble PHP into code variable.
-  var code = ' MAX ('+text_colonne+') ';
+  var code = ' MAX ('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.PHP.ORDER_NONE];
 };
 
 Blockly.PHP['sql_f_min'] = function(block) {
-  var text_colonne = block.getFieldValue('table');
+  var text_column = block.getFieldValue('table');
   // TODO: Assemble PHP into code variable.
-  var code = ' MIN ('+text_colonne+') ';
+  var code = ' MIN ('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.PHP.ORDER_NONE];
 };
@@ -432,6 +498,14 @@ Blockly.PHP['sql_order_by'] = function(block) {
   var text_column = block.getFieldValue('column');
   // TODO: Assemble PHP into code variable.
   var code = ' ORDER BY ' +text_column;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.PHP.ORDER_NONE];
+};
+
+Blockly.PHP['sql_f_round'] = function(block) {
+  var text_column = block.getFieldValue('column');
+  // TODO: Assemble PHP into code variable.
+  var code = ' ROUND('+text_column+') ';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.PHP.ORDER_NONE];
 };
