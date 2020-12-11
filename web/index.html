@@ -108,58 +108,64 @@
 
 
     <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
-<!--
+
+    	<block type = "sql_select" x="20" y="20">
+    		<value name ="SELECT">
+		   		<block type="sql_all"></block>
+			</value>
+			<value name ="FROM">
+				<block type="sql_table">
+					<field name="table">CUSTOMERS</field>
+				</block>
+			</value>
+			<value name="WHERE">
+				<block type="sql_table">
+					<field name="table">ID</field>
+					<value name="TABLE">
+						<block type="sql_in">
+							<field name="dropdown_in">IN</field>
+							<statement name="IN">
+								<block type="sql_select">
+									<value name="SELECT">
+										<block type="sql_table">
+											<field name="table">ID</field>
+										</block>
+									</value>
+									<value name="FROM">
+										<block type="sql_table">
+											<field name="table">CUSTOMERS</field>
+										</block>
+									</value>
+									<value name="WHERE">
+										<block type="sql_table">
+											<field name="table">CUSTOMERS</field>
+											<value name="TABLE">
+												<block type="sql_compare">
+													<field name='dropdown_compare'>></field>
+													<value name="COMPARED">
+														<block type="sql_table">
+															<field name="table">SALARY</field>
+														</block>
+													</value>
+													<value name="COMPARE">
+														<block type="math_number">
+															<field name="NUM">4500</field>
+														</block>
+													</value>
+												</block>
+											</value>
+										</block>
+									</value>
+								</block>
+							</statement>
+						</block>
+					</value>	
+				</block>
+			</value>
+    	</block>
 
 
-	///////////////////////////EXEMPLE D'AFFICHAGE DE BASE////////////////////////////////////
 
-        <block type="controls_if" inline="false" x="20" y="20">
-        <mutation else="1"></mutation>
-        <value name="IF0">
-            <block type="logic_compare" inline="true">
-            <field name="OP">EQ</field>
-            <value name="A">
-                <block type="math_arithmetic" inline="true">
-                <field name="OP">MULTIPLY</field>
-                <value name="A">
-                    <block type="math_number">
-                    <field name="NUM">6</field>
-                    </block>
-                </value>
-                <value name="B">
-                    <block type="math_number">
-                    <field name="NUM">7</field>
-                    </block>
-                </value>
-                </block>
-            </value>
-            <value name="B">
-                <block type="math_number">
-                <field name="NUM">42</field>
-                </block>
-            </value>
-            </block>
-        </value>
-        <statement name="DO0">
-            <block type="text_print" inline="false">
-            <value name="TEXT">
-                <block type="text">
-                <field name="TEXT">Don't panic</field>
-                </block>
-            </value>
-            </block>
-        </statement>
-        <statement name="ELSE">
-            <block type="text_print" inline="false">
-            <value name="TEXT">
-                <block type="text">
-                <field name="TEXT">Panic</field>
-                </block>
-            </value>
-            </block>
-        </statement>
-        </block>
--->
     </xml>   
 
 

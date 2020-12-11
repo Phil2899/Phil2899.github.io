@@ -235,6 +235,8 @@ Blockly.Blocks['sql_in'] = {
 
 Blockly.Blocks['sql_compare'] = {
   init: function() {
+        this.appendValueInput("COMPARED")
+        .setCheck(null);
     this.appendValueInput("COMPARE")
         .setCheck(null)
         .appendField(new Blockly.FieldDropdown([["=","="], [">",">"], ["<","<"], [">=",">="], ["<=","<="], ["<>","<>"]]), "dropdown_compare");
@@ -446,8 +448,8 @@ Blockly.JavaScript['sql_compare'] = function(block) {
   var truple = COMPARE[block.getFieldValue('dropdown_compare')];
   var drop_comp = truple[0];
 
-
-  var value_compare = Blockly.JavaScript.valueToCode(block, 'COMPARE', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_compared = Blockly.JavaScript.valueToCode(block, 'COMPARED', Blockly.JavaScript.ORDER_NONE)
+  var value_compare = Blockly.JavaScript.valueToCode(block, 'COMPARE', Blockly.JavaScript.ORDER_NONE);
 
   var code = drop_comp + value_compare;
 

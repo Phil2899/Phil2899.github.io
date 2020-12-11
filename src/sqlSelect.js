@@ -2,15 +2,15 @@
 
 Blockly.Blocks['sql_select'] = {
   init: function() {
-    this.appendValueInput("select")
+    this.appendValueInput("SELECT")
         .setCheck(null)
         .appendField("SELECT");
    	
-	this.appendValueInput("from")
+	this.appendValueInput("FROM")
 	        .setCheck(null)
 	        .appendField("FROM");
 
-	this.appendValueInput("where")
+	this.appendValueInput("WHERE")
         .setCheck(null)
         .appendField("WHERE");
 
@@ -26,9 +26,9 @@ Blockly.Blocks['sql_select'] = {
 
 Blockly.JavaScript['sql_select'] = function(block) {
 
-  var value_select = Blockly.JavaScript.valueToCode(block, 'select', Blockly.JavaScript.ORDER_NONE);
-  var value_from = Blockly.JavaScript.valueToCode(block, 'from', Blockly.JavaScript.ORDER_NONE);
-  var value_where = Blockly.JavaScript.valueToCode(block, 'where', Blockly.JavaScript.ORDER_NONE);
+  var value_select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
+  var value_from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
+  var value_where = Blockly.JavaScript.valueToCode(block, 'WHERE', Blockly.JavaScript.ORDER_NONE);
 
 
   // TODO: Assemble JavaScript into code variable.
