@@ -451,7 +451,7 @@ Blockly.JavaScript['sql_compare'] = function(block) {
   var value_compared = Blockly.JavaScript.valueToCode(block, 'COMPARED', Blockly.JavaScript.ORDER_NONE)
   var value_compare = Blockly.JavaScript.valueToCode(block, 'COMPARE', Blockly.JavaScript.ORDER_NONE);
 
-  var code = drop_comp + value_compare;
+  var code = value_compared + drop_comp + value_compare;
 
   return [code, Blockly.JavaScript.ORDER_NONE];
 };

@@ -8,10 +8,9 @@
     <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
     <script src="https://unpkg.com/blockly/msg/en.js"></script>
     <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
-    <script src="https://unpkg.com/blockly/php_compressed.js"></script>
+
     
     <script src="../src/customBlocks_sql.js"></script>
-    <script src="../src/sql_mutator.js"></script>
     <script src="../src/sqlSelect.js"></script>
 
 
@@ -137,21 +136,16 @@
 										</block>
 									</value>
 									<value name="WHERE">
-										<block type="sql_table">
-											<field name="table">CUSTOMERS</field>
-											<value name="TABLE">
-												<block type="sql_compare">
-													<field name='dropdown_compare'>></field>
-													<value name="COMPARED">
-														<block type="sql_table">
-															<field name="table">SALARY</field>
-														</block>
-													</value>
-													<value name="COMPARE">
-														<block type="math_number">
-															<field name="NUM">4500</field>
-														</block>
-													</value>
+										<block type="sql_compare">
+											<field name='dropdown_compare'>></field>
+											<value name="COMPARED">
+												<block type="sql_table">
+													<field name="table">SALARY</field>
+												</block>
+											</value>
+											<value name="COMPARE">
+												<block type="math_number">
+													<field name="NUM">4500</field>
 												</block>
 											</value>
 										</block>
@@ -192,7 +186,7 @@
             codeHolder.appendChild(code);
             codeDiv.replaceChild(codeHolder, codeDiv.lastElementChild);
             
-            prettyPrint();
+            
         }
         workspace.addChangeListener(updateFunction);
         
