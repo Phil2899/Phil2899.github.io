@@ -11,7 +11,8 @@
 
     
     <script src="../src/customBlocks_sql.js"></script>
-    <script src="../src/sqlSelect.js"></script>
+    <script src="../src/SQLCodeGenerator.js"></script>
+
 
 
 
@@ -26,8 +27,8 @@
 
         <p>
             <select id="languageDropdown" style="font-size : 16px" onchange="updateFunction();">
-                <option value="JavaScript"> JavaScript</option>
-                <option value="PHP">PHP</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="SQL" selected>SQL</option>
             </select>
         </p>
 
@@ -144,8 +145,8 @@
 												</block>
 											</value>
 											<value name="COMPARE">
-												<block type="math_number">
-													<field name="NUM">4500</field>
+												<block type="sql_value">
+													<field name="value">4500</field>
 												</block>
 											</value>
 										</block>
@@ -157,7 +158,6 @@
 				</block>
 			</value>
     	</block>
-
 
 
     </xml>   
@@ -178,10 +178,9 @@
             var languageDropdown = document.getElementById('languageDropdown');
             
             var language = languageDropdown.value;
-            
             var codeDiv = document.getElementById('codeDiv');
             var codeHolder = document.createElement('pre');
-            codeHolder .className = 'prettyprint_js';
+            codeHolder.className = 'prettyprint_js';
             var code = document.createTextNode(Blockly[language].workspaceToCode(workspace));
             codeHolder.appendChild(code);
             codeDiv.replaceChild(codeHolder, codeDiv.lastElementChild);

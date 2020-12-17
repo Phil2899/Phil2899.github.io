@@ -1,6 +1,33 @@
+Blockly.SQL = new Blockly.Generator('SQL');
+
+
 ///creation de blocks personalisé///
 
 ////creation des blocks////
+
+Blockly.Blocks['sql_select'] = {
+  init: function() {
+    this.appendValueInput("SELECT")
+        .setCheck(null)
+        .appendField("SELECT");
+    
+  this.appendValueInput("FROM")
+          .setCheck(null)
+          .appendField("FROM");
+
+  this.appendValueInput("WHERE")
+        .setCheck(null)
+        .appendField("WHERE");
+
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 Blockly.Blocks['sql_table'] = {
   init: function() {
@@ -248,211 +275,14 @@ Blockly.Blocks['sql_compare'] = {
   }
 };
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////fonction des blocks en passant par les fichier JavaScript pour l'affichage////
-Blockly.JavaScript['sql_table'] = function(block) {
-  var text_table = block.getFieldValue('table');
-  var value_table = Blockly.JavaScript.valueToCode(block, 'TABLE', Blockly.JavaScript.ORDER_NONE);
-
-  var code = text_table + value_table;
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_all'] = function(block) {
-
-  var code = '*';
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_column'] = function(block) {
-  var text_table = block.getFieldValue('table');
-  var text_column = block.getFieldValue('column');
-  var value_column = Blockly.JavaScript.valueToCode(block, "COLUMN", Blockly.JavaScript.ORDER_NONE);
-
-  var code = text_table + '.' + text_column;
-  if (value_column != "") {
-    code += ' , ' + value_column;
-  };
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_as'] = function(block) {
-  var value_as = Blockly.JavaScript.valueToCode(block, 'AS', Blockly.JavaScript.ORDER_NONE);
-  var text_alias = block.getFieldValue('alias');
-  var value_as_plus = Blockly.JavaScript.valueToCode(block, 'AS_PLUS', Blockly.JavaScript.ORDER_NONE);
-
-  var code = value_as + ' AS ' + text_alias;
-  if (value_as_plus != "") {
-    code += " , " + value_as_plus;
-  };
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_add'] = function(block) {
-  var value_add = Blockly.JavaScript.valueToCode(block, 'ADD', Blockly.JavaScript.ORDER_NONE) || '\'\'';
-
-  var code = ' , ' + value_add;
-  return code;
-};
-
-Blockly.JavaScript['sql_or'] = function(block) {
-  var value_or = Blockly.JavaScript.valueToCode(block, 'OR', Blockly.JavaScript.ORDER_NONE);
-
-  var code = ' OR '+value_or;
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_not'] = function(block) {
-  var value_not = Blockly.JavaScript.valueToCode(block, 'NOT', Blockly.JavaScript.ORDER_NONE);
-
-  var code = ' NOT '+value_not;
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_f_sum'] = function(block) {
-  var text_column = block.getFieldValue('table');
-
-  var code = ' SUM ('+text_column+') ';
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_f_max'] = function(block) {
-  var text_column = block.getFieldValue('table');
-
-  var code = ' MAX ('+text_column+') ';
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_f_min'] = function(block) {
-  var text_column = block.getFieldValue('table');
-
-  var code = ' MIN ('+text_column+') ';
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_f_count'] = function(block) {
-  var text_table = block.getFieldValue('table');
-
-  var code = ' COUNT ('+text_table+') ';
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_f_avg'] = function(block) {
-  var text_table = block.getFieldValue('table');
-
-  var code = 'AVG ('+text_table+') ';
-  return code;
-};
-
-Blockly.JavaScript['sql_f_round'] = function(block) {
-  var text_column = block.getFieldValue('column');
-
-  var code = ' ROUND('+text_column+') ';
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['sql_order_by'] = function(block) {
-
-  var SENS = {
-    'ASC': [' ASC '],
-    'DESC': [' DESC ']
+Blockly.Blocks['sql_value'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField(new Blockly.FieldTextInput("value"), "value");
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
-  var tuple = SENS[block.getFieldValue('ORDER_BY_SENS')];
-  var sens = tuple[0];
-
-
-  var text_order_by_column = block.getFieldValue('ORDER_BY_COLUMN');
-
-  var value_order_by = Blockly.JavaScript.valueToCode(block,'ORDER_BY', Blockly.JavaScript.ORDER_NONE);
-
-  var code = " ORDER BY " + text_order_by_column + sens + value_order_by;
-
-  return code;
 };
-
-Blockly.JavaScript['sql_null'] = function(block) {
-  var NULL = {
-    'null': [' IS NULL '],
-    'not_null': [' IS NOT NULL ']
-  }
-  var tuple = NULL[block.getFieldValue('dropdown_null')];
-  var drop = tuple[0];
-
-  var code = drop;
-  return [code, Blockly.JavaScript.ORDER_NONE];
-
-}
-
-Blockly.JavaScript['sql_join']= function(block){
-  var JOIN = {
-    'inner': [' INNER JOIN '],
-    'right': [' RIGHT JOIN '],
-    'left': [' LEFT JOIN '],
-    'full': [' FULL JOIN ']
-  }
-
-  var tuple = JOIN[block.getFieldValue('dropdown_join')];
-  var drop = tuple[0];
-
-  var value_join = Blockly.JavaScript.valueToCode(block, 'JOIN', Blockly.JavaScript.ORDER_NONE);
-
-  var code = drop + value_join;
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-}
-
-
-Blockly.JavaScript['sql_in'] = function(block) {
-  
-  var IN ={
-    'IN' : [' IN '],
-    'NOT IN': [' NOT IN ']
-  }
-
-  var truple = IN[block.getFieldValue('dropdown_in')];
-  var drop_in = truple[0];
-
-  var statements_in = Blockly.JavaScript.statementToCode(block, 'IN');
-  
-  var code = drop_in + '(' + statements_in + ')' ;
-  
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-
-
-Blockly.JavaScript['sql_compare'] = function(block) {
-  
-  var COMPARE = {
-    '=': [' = '],
-    '>': [' > '],
-    '<': [' < '],
-    '>=': [' >= '],
-    '<=': [' <= '],
-    '<>': [' <> ']
-  }
-
-  var truple = COMPARE[block.getFieldValue('dropdown_compare')];
-  var drop_comp = truple[0];
-
-  var value_compared = Blockly.JavaScript.valueToCode(block, 'COMPARED', Blockly.JavaScript.ORDER_NONE)
-  var value_compare = Blockly.JavaScript.valueToCode(block, 'COMPARE', Blockly.JavaScript.ORDER_NONE);
-
-  var code = value_compared + drop_comp + value_compare;
-
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
