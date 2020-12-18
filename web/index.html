@@ -13,14 +13,14 @@
     <script src="../src/customBlocks_sql.js"></script>
     <script src="../src/SQLCodeGenerator.js"></script>
 
-
-
-
 </head>
+
+
 <body>
     <h1>Visual Query Editor</h1>
 
     
+    <!-- Langage selection-->
     <div class="dropdown-bar">
         Language : 
         
@@ -41,7 +41,7 @@
 
     </div>
     
-    
+    <!-- Creation of the toolbox and organization of the elements inside -->
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
         <category name="Logic" colour="%{BKY_LOGIC_HUE}">
             <block type="controls_if"></block>
@@ -81,6 +81,7 @@
             	<block type="sql_all"></block>
                 <block type="sql_table"></block>
                 <block type="sql_column"></block>
+                <block type="sql_value"></block>
                 <block type="sql_as"></block>
                 <block type="sql_add"></block>
                 <block type="sql_order_by"></block>
@@ -106,7 +107,7 @@
     </xml>
 
 
-
+    <!-- Creation of an exemple to display at the opening of the page -->
     <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
 
     	<block type = "sql_select" x="20" y="20">
@@ -158,9 +159,9 @@
 				</block>
 			</value>
     	</block>
-
-
+    
     </xml>   
+
 
 
     <script>
@@ -170,9 +171,7 @@
 
         Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),workspace);
 
-        
-        
-        
+
         function updateFunction(event){
             
             var languageDropdown = document.getElementById('languageDropdown');
@@ -183,9 +182,7 @@
             codeHolder.className = 'prettyprint_js';
             var code = document.createTextNode(Blockly[language].workspaceToCode(workspace));
             codeHolder.appendChild(code);
-            codeDiv.replaceChild(codeHolder, codeDiv.lastElementChild);
-            
-            
+            codeDiv.replaceChild(codeHolder, codeDiv.lastElementChild);    
         }
         workspace.addChangeListener(updateFunction);
         

@@ -1,14 +1,16 @@
+//Langage creation//
+Blockly.SQL = new Blockly.Generator('SQL');
+
+//Creation of the operational precedece//
 Blockly.SQL.PRECEDENCE = 0;
 
-
+//Generating SQL for the custom blocks//
 Blockly.SQL['sql_select'] = function(block) {
 
   var value_select = Blockly.SQL.valueToCode(block, 'SELECT', Blockly.SQL.PRECEDENCE);
   var value_from = Blockly.SQL.valueToCode(block, 'FROM', Blockly.SQL.PRECEDENCE);
   var value_where = Blockly.SQL.valueToCode(block, 'WHERE', Blockly.SQL.PRECEDENCE);
 
-
-  // TODO: Assemble SQL into code variable.
   var code = 'SELECT '+value_select;
   if (value_from != '') {
     code += " FROM "+value_from;
@@ -19,7 +21,6 @@ Blockly.SQL['sql_select'] = function(block) {
 
   return code;
 };
-
 
 Blockly.SQL['sql_table'] = function(block) {
   var text_table = block.getFieldValue('table');
@@ -86,53 +87,6 @@ Blockly.SQL['sql_not'] = function(block) {
   return [code, Blockly.SQL.PRECEDENCE];
 };
 
-Blockly.SQL['sql_f_sum'] = function(block) {
-  var text_column = block.getFieldValue('table');
-
-  var code = ' SUM ('+text_column+') ';
-
-  return [code, Blockly.SQL.PRECEDENCE];
-};
-
-Blockly.SQL['sql_f_max'] = function(block) {
-  var text_column = block.getFieldValue('table');
-
-  var code = ' MAX ('+text_column+') ';
-
-  return [code, Blockly.SQL.PRECEDENCE];
-};
-
-Blockly.SQL['sql_f_min'] = function(block) {
-  var text_column = block.getFieldValue('table');
-
-  var code = ' MIN ('+text_column+') ';
-
-  return [code, Blockly.SQL.PRECEDENCE];
-};
-
-Blockly.SQL['sql_f_count'] = function(block) {
-  var text_table = block.getFieldValue('table');
-
-  var code = ' COUNT ('+text_table+') ';
-
-  return [code, Blockly.SQL.PRECEDENCE];
-};
-
-Blockly.SQL['sql_f_avg'] = function(block) {
-  var text_table = block.getFieldValue('table');
-
-  var code = 'AVG ('+text_table+') ';
-  return code;
-};
-
-Blockly.SQL['sql_f_round'] = function(block) {
-  var text_column = block.getFieldValue('column');
-
-  var code = ' ROUND('+text_column+') ';
-
-  return [code, Blockly.SQL.PRECEDENCE];
-};
-
 Blockly.SQL['sql_order_by'] = function(block) {
 
   var SENS = {
@@ -183,7 +137,6 @@ Blockly.SQL['sql_join']= function(block){
   return [code, Blockly.SQL.PRECEDENCE];
 }
 
-
 Blockly.SQL['sql_in'] = function(block) {
   
   var IN ={
@@ -200,8 +153,6 @@ Blockly.SQL['sql_in'] = function(block) {
   
   return [code, Blockly.SQL.PRECEDENCE];
 };
-
-
 
 Blockly.SQL['sql_compare'] = function(block) {
   
@@ -230,6 +181,53 @@ Blockly.SQL['sql_value'] = function(block) {
   var value_value = Blockly.SQL.valueToCode(block, 'VALUE', Blockly.SQL.PRECEDENCE);
 
   var code = text_value + value_value;
+
+  return [code, Blockly.SQL.PRECEDENCE];
+};
+
+Blockly.SQL['sql_f_sum'] = function(block) {
+  var text_column = block.getFieldValue('table');
+
+  var code = ' SUM ('+text_column+') ';
+
+  return [code, Blockly.SQL.PRECEDENCE];
+};
+
+Blockly.SQL['sql_f_max'] = function(block) {
+  var text_column = block.getFieldValue('table');
+
+  var code = ' MAX ('+text_column+') ';
+
+  return [code, Blockly.SQL.PRECEDENCE];
+};
+
+Blockly.SQL['sql_f_min'] = function(block) {
+  var text_column = block.getFieldValue('table');
+
+  var code = ' MIN ('+text_column+') ';
+
+  return [code, Blockly.SQL.PRECEDENCE];
+};
+
+Blockly.SQL['sql_f_count'] = function(block) {
+  var text_table = block.getFieldValue('table');
+
+  var code = ' COUNT ('+text_table+') ';
+
+  return [code, Blockly.SQL.PRECEDENCE];
+};
+
+Blockly.SQL['sql_f_avg'] = function(block) {
+  var text_table = block.getFieldValue('table');
+
+  var code = 'AVG ('+text_table+') ';
+  return code;
+};
+
+Blockly.SQL['sql_f_round'] = function(block) {
+  var text_column = block.getFieldValue('column');
+
+  var code = ' ROUND('+text_column+') ';
 
   return [code, Blockly.SQL.PRECEDENCE];
 };

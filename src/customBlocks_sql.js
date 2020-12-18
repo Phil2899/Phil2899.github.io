@@ -1,9 +1,4 @@
-Blockly.SQL = new Blockly.Generator('SQL');
-
-
-///creation de blocks personalisé///
-
-////creation des blocks////
+////Custom Block creation for SQL request///
 
 Blockly.Blocks['sql_select'] = {
   init: function() {
@@ -132,6 +127,83 @@ Blockly.Blocks['sql_not'] = {
   }
 };
 
+Blockly.Blocks['sql_order_by'] = {
+  init: function() {
+    this.appendValueInput("ORDER_BY")
+        .setCheck(null)
+        .appendField("ORDER BY")
+        .appendField(new Blockly.FieldTextInput("column"), "ORDER_BY_COLUMN")
+        .appendField(new Blockly.FieldDropdown([["ASC","ASC"], ["DESC","DESC"]]), "ORDER_BY_SENS");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sql_null'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["IS NULL","null"], ["IS NOT NULL","not_null"]]), "dropdown_null");
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sql_join'] = {
+  init: function() {
+    this.appendValueInput("JOIN")
+        .setCheck(null)
+        .appendField(new Blockly.FieldDropdown([["INNER JOIN","inner"], ["LEFT JOIN","left"], ["RIGHT JOIN","right"], ["FULL JOIN","full"]]), "dropdown_join");
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sql_in'] = {
+  init: function() {
+    this.appendStatementInput("IN")
+        .setCheck(null)
+        .appendField(new Blockly.FieldDropdown([["IN","IN"], ["NOT IN","NOT IN"]]), "dropdown_in");
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sql_compare'] = {
+  init: function() {
+        this.appendValueInput("COMPARED")
+        .setCheck(null);
+    this.appendValueInput("COMPARE")
+        .setCheck(null)
+        .appendField(new Blockly.FieldDropdown([["=","="], [">",">"], ["<","<"], [">=",">="], ["<=","<="], ["<>","<>"]]), "dropdown_compare");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sql_value'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField(new Blockly.FieldTextInput("value"), "value");
+    this.setOutput(true, null);
+    this.setColour(42);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['sql_f_sum'] = {
   init: function() {
     this.appendDummyInput()
@@ -203,83 +275,6 @@ Blockly.Blocks['sql_f_round'] = {
         .appendField("ROUND(")
         .appendField(new Blockly.FieldTextInput("column"), "column")
         .appendField(")");
-    this.setOutput(true, null);
-    this.setColour(42);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-Blockly.Blocks['sql_order_by'] = {
-  init: function() {
-    this.appendValueInput("ORDER_BY")
-        .setCheck(null)
-        .appendField("ORDER BY")
-        .appendField(new Blockly.FieldTextInput("column"), "ORDER_BY_COLUMN")
-        .appendField(new Blockly.FieldDropdown([["ASC","ASC"], ["DESC","DESC"]]), "ORDER_BY_SENS");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(42);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-Blockly.Blocks['sql_null'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["IS NULL","null"], ["IS NOT NULL","not_null"]]), "dropdown_null");
-    this.setOutput(true, null);
-    this.setColour(42);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-Blockly.Blocks['sql_join'] = {
-  init: function() {
-    this.appendValueInput("JOIN")
-        .setCheck(null)
-        .appendField(new Blockly.FieldDropdown([["INNER JOIN","inner"], ["LEFT JOIN","left"], ["RIGHT JOIN","right"], ["FULL JOIN","full"]]), "dropdown_join");
-    this.setOutput(true, null);
-    this.setColour(42);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-Blockly.Blocks['sql_in'] = {
-  init: function() {
-    this.appendStatementInput("IN")
-        .setCheck(null)
-        .appendField(new Blockly.FieldDropdown([["IN","IN"], ["NOT IN","NOT IN"]]), "dropdown_in");
-    this.setOutput(true, null);
-    this.setColour(42);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-Blockly.Blocks['sql_compare'] = {
-  init: function() {
-        this.appendValueInput("COMPARED")
-        .setCheck(null);
-    this.appendValueInput("COMPARE")
-        .setCheck(null)
-        .appendField(new Blockly.FieldDropdown([["=","="], [">",">"], ["<","<"], [">=",">="], ["<=","<="], ["<>","<>"]]), "dropdown_compare");
-    this.setInputsInline(true);
-    this.setOutput(true, null);
-    this.setColour(42);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-Blockly.Blocks['sql_value'] = {
-  init: function() {
-    this.appendValueInput("VALUE")
-        .setCheck(null)
-        .appendField(new Blockly.FieldTextInput("value"), "value");
     this.setOutput(true, null);
     this.setColour(42);
  this.setTooltip("");
